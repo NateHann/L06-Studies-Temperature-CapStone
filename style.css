@@ -1,0 +1,65 @@
+body, h1, p, input, select, button, div {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #282c34; /* Dark background for cool feel */
+    color: #61dafb; /* Light blue for text to pop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1); /* Slight transparency */
+    backdrop-filter: blur(10px); /* Blur effect for background */
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.converter-box {
+    margin-bottom: 20px;
+}
+
+input, select, button {
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+}
+
+input, select {
+    width: calc(50% - 22px); /* Adjust width to fit side by side */
+    color: #333;
+}
+
+button {
+    width: 100%;
+    cursor: pointer;
+    background-color: #61dafb; /* Light blue to match the text */
+    color: #282c34; /* Dark background color for the text */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #4fa8d8; /* Darker shade of blue for hover */
+    transform: scale(1.05); /* Slight increase in size */
+}
+
+.result {
+    color: #fff;
+    margin-top: 20px;
+}
+
+/* Add more styles or effects as needed */

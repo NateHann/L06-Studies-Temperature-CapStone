@@ -1,66 +1,57 @@
-// Get initial temperature metric from user - Change to uppercase so that lowercase doesn't cause error
-let fromMetric = prompt((`In which metric is the temperature you are converting?
-C - Celsius
-K - Kelvin
-F - Fahrenheit.`).toUpperCase());
+document.addEventListener('DOMContentLoaded', () => {
+    // Attach event listener to the button
+    document.querySelector('button').addEventListener('click', convertTemperature);
+});
 
-//Get temperature to convert
-let inputTemp = prompt('Enter the temperature value:');
-//Cast number to float
-let floatInputTemp = parseFloat(inputTemp);
+function convertTemperature() {
+    // Get input value and selected conversion types
+    let inputTemp = parseFloat(document.getElementById('tempInput').value);
+    let fromToMetric = document.getElementById('tempType').value;
 
-// Get target temperature metric from user - Change to uppercase so that lowercase doesn't cause error
-let toMetric = prompt(`In which metric is the temperature you are converting?
-C - Celsius
-K - Kelvin
-F - Fahrenheit.`).toUpperCase();
+    let result;
 
-// Convert temperature- provide variable to calculate to
-let result;
+    // Determine conversion based on selection
+    switch(fromToMetric) {
+        case 'celsiusToFahrenheit':
+            result = (inputTemp * 9/5) + 32;
+            break;
+        case 'fahrenheitToCelsius':
+            result = (inputTemp - 32) * 5/9;
+            break;
+        case 'celsiusToKelvin':
+            result = inputTemp + 273.15;
+            break;
+        case 'kelvinToCelsius':
+            result = inputTemp - 273.15;
+            break;
+        case 'fahrenheitToKelvin':
+            result = (inputTemp + 459.67) * 5/9;
+            break;
+        case 'kelvinToFahrenheit':
+            result = (inputTemp * 9/5) - 459.67;
+            break;
+        default:
+            document.getElementById('result').textContent = 'Please select a valid conversion.';
+            return;
+    }
 
-    // Convert Celsius to Fahrenheit
-if (fromMetric === 'C' && toMetric === 'F') {
-    result = (floatInputTemp * 9/5) + 32;
-    // Convert Fahrenheit to Celsius
-} else if (fromMetric === 'F' && toMetric === 'C') {
-     result = (floatInputTemp - 32) * 5/9;
-     // Convert Kelvin to Fahrenheit
-} else if (fromMetric === 'K' && toMetric === 'F') {
-    result = (floatInputTemp * 9/5) - 459.67;
-    // Convert Fahrenheit to Kelvin
-} else if (fromMetric === 'F' && toMetric === 'K') {
-    result = (floatInputTemp + 459.67) * 5/9;
-    // Convert Celsius to Kelvin
-} else if (fromMetric === 'C' && toMetric === 'K') {
-    result = floatInputTemp + 273.15;
-    // Convert Kelvin to Celsius
-} else if (fromMetric === 'K' && toMetric === 'C') {
-    result = floatInputTemp - 273.15;
-} else {
-    
-//Inform user of incorrect input (example entry of a character other than the choices given)
-console.log('Invalid character entered. Please check your input.');
-alert('Invalid character entered. Please check your input.');
+    // Format and display result
+    result = result.toFixed(2); // Round to two decimal places
+    document.getElementById('result').textContent = `Converted temperature: ${result} ${getMetricSymbol(fromToMetric)}`;
 }
-result = result.toFixed(2);
 
-// Defining metric symbol to add to result 
-//*NOTE TO MENTOR - Did not know how to output result as requested in task description other than doing the below,had to research how to do function.
-
-const fromMetricSymbol = getMetricSymbol(fromMetric);
-const toMetricSymbol = getMetricSymbol(toMetric);
-
-function getMetricSymbol(metric) {
-    if (metric === 'C') {
-        return '°C';
-    } else if (metric === 'K') {
-        return 'K';
-    } else if (metric === 'F') {
-        return '°F';
-    } else {
-        return '';
+function getMetricSymbol(conversionType) {
+    switch(conversionType) {
+        case 'celsiusToFahrenheit':
+        case 'kelvinToFahrenheit':
+            return '°F';
+        case 'fahrenheitToCelsius':
+        case 'kelvinToCelsius':
+            return '°C';
+        case 'celsiusToKelvin':
+        case 'fahrenheitToKelvin':
+            return 'K';
+        default:
+            return '';
     }
 }
-// Log result and show result to user
-console.log(`${inputTemp}${fromMetricSymbol} is ${result}${toMetricSymbol}`);
-alert(`Converted temperature: ${inputTemp}${fromMetricSymbol} is ${result}${toMetricSymbol}`);
